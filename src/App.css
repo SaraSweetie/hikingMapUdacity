@@ -1,27 +1,97 @@
-.App {
-  text-align: center;
+* {margin:0; padding:0; border:0;}
+html, body, main {
+  height: 100%;
+  width: 100%;
 }
-
+/* --- Header Styles --- */
 .App-header {
   background-color: #282c34;
   min-height: 80px;
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  font-size: 2em;
+}
+#logo {
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-start;
 }
 
-/* --- Map --- */
+#logo img {
+  width: 150px;
+  padding: 5%;
+}
+
+#logo h1 {
+  display: inline-block;
+  font-size: 1em;
+  color:#ffffff;
+  margin-left: 25px;
+}
+
+#tagline {
+  flex-grow:3;
+  border: 1px solid #ffffff;
+}
+
+#menu {
+  align-self:flex-end;
+  width: 70px;
+  height: 70px;
+  margin-right: 2%;
+}
+
+main {
+  overflow: hidden;
+}
+
+/* --- Sidebar Styles --- */
+#sidebar {
+  width: 30%;
+  background-color: #f5f5f5;
+  height: calc(100vh - 80px);
+  position: absolute;
+  z-index: 1;
+  -webkit-transform: translate(333.5%, 0);
+  transform: translate(333.5%, 0);
+  transition: transform 0.3s ease;
+}
+
+#sidebar.open {
+  -webkit-transform: translate(233.5%, 0);
+  transform: translate(233.5%,0);
+}
+
+#sidebar #filterResults {
+  list-style-type: none;
+  width: 96%;
+  padding: 2%;
+}
+
+/* --- Map Styles --- */
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
   height: calc(100vh - 80px);
+  width: 100%;
+  background-color: yellow;
 }
-/* Optional: Makes the sample page fill the window. */
-html, main {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+
+/* --- Footer Styles --- */
+footer p {
+  text-align: center;
+  font-size: .8em;
+}
+
+footer a {
+  color:#000000;
+  text-decoration:none;
+}
+
+footer a:hover {
+  text-decoration: dotted;
+  color: orange;
 }
