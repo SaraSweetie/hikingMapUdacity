@@ -38,25 +38,37 @@ class App extends React.Component {
     
     console.log(this.state.parks) // retuns 30 PA parks
 
-      var latLong = this.state.parks[5].latLong.split(', '); // splits latLong into 2 at ,
-      var latitude = latLong[0].slice(3);
-      var longitude = latLong[1].slice(4);
-
+      var latLongTEST = this.state.parks[5].latLong.split(', '); // splits latLong into 2 at ,
+      var latitudeTEST = latLongTEST[0].slice(3);
+      var longitudeTEST = latLongTEST[1].slice(4);
       //working get good results below
-      console.log(latLong)
-      console.log(latitude)
-      console.log(longitude)
+      console.log(latLongTEST)
+      console.log(latitudeTEST)
+      console.log(longitudeTEST)
+      console.log(typeof longitudeTEST) // string
+      console.log(typeof parseFloat(longitudeTEST)) //number
 
 
     this.state.parks.map( park => {
-      //NPS API returns latLong as a string example: "lat:40.42977467, long:-78.57431622"
-      var latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
-      var latNum = latLong[0].slice(3); // remove lat:
-      var longNum = latLong[1].slice(4); // remove long:
+     console.log(this.park) // returned undefined.... why?
 
+     //NPS API returns latLong as a string example: "lat:40.42977467, long:-78.57431622"
+      var latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
+      var remvLat = latLong[0].slice(3); // remove lat: (returns a string)
+      var remvLong = latLong[1].slice(4); // remove long: (returns a string)
+
+      var latNum = parseFloat(remvLat); // convert to floating point
+      var longNum = parseFloat(remvLong); // convert to floating point
 
       var marker = new window.google.maps.Marker({
         position: {lat: latNum, lng: longNum},
+        map: map,
+      });
+
+
+      // this marker works
+      var marker = new window.google.maps.Marker({
+        position: {lat: 41.203323, lng: -77.194527},
         map: map,
         title: 'Center of PA'
       });
