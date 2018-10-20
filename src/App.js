@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './App.css'
 import Header from './components/header'
 import Sidebar from './components/sidebar'
@@ -6,7 +6,18 @@ import Map from './components/map'
 import * as Utils from "./Utils/index";
 import Footer from './components/footer'
 
-class App extends Component {
+class App extends React.Component {
+  constructor(props) {
+        super(props);
+            this.state = {
+              parks: [],
+              mapCenter: {
+                lat: 41.203323,
+                lng: -77.194527},
+              sidebarToggle: false
+            };
+    }    
+
   componentDidMount () {
     //this.renderMap();
   }
@@ -31,9 +42,7 @@ class App extends Component {
     fetch('https://developer.nps.gov/api/v1/parks?parkCode=&stateCode=PA&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
       .then(results => results.json())
       .then(results => {
-        this.setState({
-          parks: results.data,
-        })
+        this.setState({parks: results.data,})
       })
   }
 
@@ -43,7 +52,7 @@ class App extends Component {
         <Header />
 
         <main>
-          <Sidebar />
+          <Sidebar {...this.state.parks} />
           <Map />
         </main>
       
