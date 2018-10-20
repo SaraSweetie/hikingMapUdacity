@@ -3,18 +3,20 @@ import './App.css'
 import Header from './components/header'
 import Sidebar from './components/sidebar'
 import Map from './components/map'
+import * as Utils from "./Utils/index";
 import Footer from './components/footer'
-
-
-const APIkeyNPS = "FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf";
 
 class App extends Component {
   componentDidMount () {
-    this.renderMap()
+    //this.renderMap();
+  }
+
+  componentWillMount() {
+    this.getParks();
   }
 
   renderMap = () => {
-    loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCuiW5creiml57NOunZtpggZ59_XjAl5FI&callback=initMap")
+    Utils.loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCuiW5creiml57NOunZtpggZ59_XjAl5FI&callback=initMap")
     window.initMap = this.initMap
   }
 
@@ -26,9 +28,13 @@ class App extends Component {
   }
 
   getParks = async () => {
-    const APIcall = await fetch(`https://developer.nps.gov/api/v1/parks?parkCode=&stateCode=PA&api_key=${APIkeyNPS}`);
-    const parks = await APIcall.json();
-    console.log(this.parks.data.title);
+    fetch('https://developer.nps.gov/api/v1/parks?parkCode=&stateCode=PA&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
+      .then(results => results.json())
+      .then(results => {
+        this.setState({
+          parks: results.data,
+        })
+      })
   }
 
   render() {
@@ -40,19 +46,11 @@ class App extends Component {
           <Sidebar />
           <Map />
         </main>
-
+      
+        <Footer />
       </div>
     );
   }
 }
-
-  function loadScript(src) {
-    var index = window.document.getElementsByTagName('script')[0]
-    var script = window.document.createElement('script')
-    script.src = src
-    script.async = true
-    script.defer = true
-    index.parentNode.insertBefore(script, index)
-  }
 
 export default App;
