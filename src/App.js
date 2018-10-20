@@ -3,7 +3,7 @@ import './App.css'
 import Header from './components/header'
 import Sidebar from './components/sidebar'
 import Map from './components/map'
-import * as Utils from "./Utils/index";
+import * as Utils from "./Utils/index.js";
 import Footer from './components/footer'
 
 class App extends React.Component {
@@ -19,7 +19,7 @@ class App extends React.Component {
     }    
 
   componentDidMount () {
-    //this.renderMap();
+    this.renderMap();
   }
 
   componentWillMount() {
@@ -32,10 +32,16 @@ class App extends React.Component {
   }
 
   initMap = () => {
-        var map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {lat: 41.203323, lng: -77.194527},
-          zoom: 8
-        });
+    var map = new window.google.maps.Map(document.getElementById('map'), {
+      center: {lat: 41.203323, lng: -77.194527},
+      zoom: 8
+    });
+    
+    var marker = new window.google.maps.Marker({
+      position: {lat: 41.203323, lng: -77.194527},
+      map: map,
+      title: 'Center of PA'
+    });
   }
 
   getParks = async () => {
