@@ -66,10 +66,17 @@ class App extends React.Component {
       },this.renderMap())
   }
 
+  //toggle visability of sidebar with button
+  menuToggle = () => {
+    this.setState((prevState) => {
+      return {sidebarToggle: !prevState.sidebarToggle};
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <Header {...this.state} />
+        <Header {...this.state} menuToggle={this.menuToggle}/>
 
         <main>
           <Sidebar {...this.state} />

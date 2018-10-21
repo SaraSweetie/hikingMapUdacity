@@ -80,7 +80,6 @@ button {
 #map {
   height: calc(100vh - 180px); /* header height 130, footer 50 height */
   width: 100%;
-  background-color: yellow;
   border: 0;
   box-shadow: none;
 }
