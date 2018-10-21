@@ -37,7 +37,8 @@ class App extends React.Component {
     });
     
     this.state.parks.map( park => {
-     console.log(this.park) // returned undefined.... why?
+     return (
+        console.log(this.park) // returned undefined.... why?
 /*
      //NPS API returns latLong as a string example: "lat:40.42977467, long:-78.57431622"
       var latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
@@ -47,6 +48,7 @@ class App extends React.Component {
       var latNum = parseFloat(remvLat); // convert to floating point
       var longNum = parseFloat(remvLong); // convert to floating point
 */
+    );
 
       // this marker works
       var marker = new window.google.maps.Marker({
@@ -76,7 +78,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header {...this.state} menuToggle={this.menuToggle}/>
+        <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
           <Sidebar {...this.state} />
