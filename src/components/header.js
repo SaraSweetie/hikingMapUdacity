@@ -7,12 +7,15 @@ const Header = (props) => {
             <header className="App-header">
               <div id="logo">
                 <img src={Logo} alt="Hike PA logo" />
-                <h1>Hike PA</h1>
               </div>
               <div id="tagline">
-                <p>some text here?</p>
+                <h1>Hike PA</h1>
               </div>
-              <nav id="menu"><img src={Menu} alt="menu"/></nav>
+              <nav id="menu">
+                <button>
+                  <img src={Menu} alt="toggle menu"/>
+                </button>
+              </nav>
             </header> 
 		);
 }

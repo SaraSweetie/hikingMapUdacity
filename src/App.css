@@ -1,12 +1,16 @@
 * {margin:0; padding:0; border:0;}
+
 html, body, main {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
+
 /* --- Header Styles --- */
 .App-header {
   background-color: #282c34;
-  min-height: 80px;
+  height: 110px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -25,7 +29,7 @@ html, body, main {
   padding: 5%;
 }
 
-#logo h1 {
+h1 {
   display: inline-block;
   font-size: 1em;
   color:#ffffff;
@@ -34,40 +38,39 @@ html, body, main {
 
 #tagline {
   flex-grow:3;
-  border: 1px solid #ffffff;
 }
 
-#menu {
+button {
   align-self:flex-end;
-  width: 70px;
-  height: 70px;
-  margin-right: 2%;
-}
-
-main {
-  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  background-color:#282c34;
+  position: absolute;
+  top: 40px;
+  right:20px;
 }
 
 /* --- Sidebar Styles --- */
 #sidebar {
-  width: 30%;
+  width: 40%;
+  padding: 2.5%;
   background-color: #f5f5f5;
   height: calc(100vh - 80px);
   position: absolute;
   z-index: 1;
-  -webkit-transform: translate(333.5%, 0);
-  transform: translate(333.5%, 0);
+  -webkit-transform: translate(300%, 0);
+  transform: translate(300%, 0);
   transition: transform 0.3s ease;
 }
 
 #sidebar.open {
-  -webkit-transform: translate(233.5%, 0);
-  transform: translate(233.5%,0);
+  -webkit-transform: translate(122.5%, 0);
+  transform: translate(122.5%,0);
 }
 
 #sidebar #filterResults {
   list-style-type: none;
-  width: 96%;
+  width: 94%;
   padding: 2%;
 }
 
@@ -75,19 +78,25 @@ main {
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-  height: calc(100vh - 80px);
+  height: calc(100vh - 180px); /* header height 130, footer 50 height */
   width: 100%;
   background-color: yellow;
+  border: 0;
+  box-shadow: none;
 }
 
 /* --- Footer Styles --- */
-footer p {
-  text-align: center;
-  font-size: .8em;
+footer {
+  width: calc(100% - 15px);
+  height: 35px;
+  padding: 7.5px;
+  background-color: #282c34;
 }
 
-footer a {
-  color:#000000;
+footer p, footer a {
+  text-align: center;
+  font-size: .9em;
+  color:#ffffff;
   text-decoration:none;
 }
 
