@@ -18,12 +18,12 @@ class App extends React.Component {
       };
   }    
 
-  componentDidMount () {
-    //this.renderMap()
-  }
-
   componentWillMount() {
     this.getParks();
+  }
+
+  componentDidMount () {
+    //this.renderMap()
   }
 
   renderMap = () => {
@@ -36,7 +36,7 @@ class App extends React.Component {
   initMap = () => {
       var map = new window.google.maps.Map(document.getElementById('map'), {
         center: {lat: 41.203323, lng: -77.194527},
-        zoom: 8
+        zoom: 8,
       });
       
       // this marker works
@@ -46,9 +46,7 @@ class App extends React.Component {
         title: 'Center of PA'
       });*/
 
-      console.log(this.state.parks) // returns array of park objects
       this.state.parks.map( park => {
-        
         console.log(park) // returns EACH park object
         console.log(park.latLong) // returns EACH park object
 
