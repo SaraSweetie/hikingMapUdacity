@@ -19,6 +19,7 @@ class App extends React.Component {
   }    
 
   componentDidMount () {
+    this.renderMap()
   }
 
   componentWillMount() {
@@ -35,22 +36,11 @@ class App extends React.Component {
       center: {lat: 41.203323, lng: -77.194527},
       zoom: 8
     });
+      
+      console.log(this.state.parks) // returns array of park objects
 
-      // this marker works
-      var marker = new window.google.maps.Marker({
-        position: {lat: 41.203323, lng: -77.194527},
-        map: map,
-        title: 'Center of PA'
-      });
-
-  }
-    
-/*    this.state.parks.map( park => {
-     return (
-        console.log(this.park) // returned undefined.... why?
-
-     //NPS API returns latLong as a string example: "lat:40.42977467, long:-78.57431622"
-      var latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
+      //NPS API returns latLong as a string example: "lat:40.42977467, long:-78.57431622"
+      var latLong = this.state.parks.latLong.split(', '); // splits latLong into two at , stores in an array
       var remvLat = latLong[0].slice(3); // remove lat: (returns a string)
       var remvLong = latLong[1].slice(4); // remove long: (returns a string)
 
@@ -59,20 +49,18 @@ class App extends React.Component {
       
       var marker = new window.google.maps.Marker({
         position: {lat: latNum, lng: longNum},
-        id: park.id,
         map: map,
+        title: this.state.parks.name
       });
-
-    );
-    })
-*/
+}
 
   getParks = async () => {
     fetch('https://developer.nps.gov/api/v1/parks?parkCode=&stateCode=PA&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
       .then(results => results.json())
       .then(results => {
         this.setState({parks: results.data,})
-      },this.renderMap())
+          console.log(results.data) // returns array of park objects
+      })
   }
 
   //toggle visability of sidebar with button
