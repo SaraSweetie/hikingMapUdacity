@@ -31,36 +31,49 @@ class App extends React.Component {
     window.initMap = this.initMap
   }
 
+
+
   initMap = () => {
-    var map = new window.google.maps.Map(document.getElementById('map'), {
-      center: {lat: 41.203323, lng: -77.194527},
-      zoom: 8
-    });
-      
-      console.log(this.state.parks) // returns array of park objects
-
-      //NPS API returns latLong as a string example: "lat:40.42977467, long:-78.57431622"
-      var latLong = this.state.parks.latLong.split(', '); // splits latLong into two at , stores in an array
-      var remvLat = latLong[0].slice(3); // remove lat: (returns a string)
-      var remvLong = latLong[1].slice(4); // remove long: (returns a string)
-
-      var latNum = parseFloat(remvLat); // convert to floating point
-      var longNum = parseFloat(remvLong); // convert to floating point
-      
-      var marker = new window.google.maps.Marker({
-        position: {lat: latNum, lng: longNum},
-        map: map,
-        title: this.state.parks.name
+      var map = new window.google.maps.Map(document.getElementById('map'), {
+        center: {lat: 41.203323, lng: -77.194527},
+        zoom: 8
       });
-}
+      
+      console.log(`parks: ${this.state.parks}`) // returns array of park objects - EMPTY...
+      // this marker works
+      var marker = new window.google.maps.Marker({
+        position: {lat: 41.203323, lng: -77.194527},
+        map: map,
+        title: 'Center of PA'
+      });
+
+
+      this.state.parks.map( park => {
+        
+        console.log(`All 23 parks?: ${park}`) // returns array of park objects
+                var latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
+                var remvLat = latLong[0].slice(3); // remove lat: (returns a string)
+                var remvLong = latLong[1].slice(4); // remove long: (returns a string)
+        
+                var latNum = parseFloat(remvLat); // convert to floating point
+                var longNum = parseFloat(remvLong); // convert to floating point
+        
+                var marker = new window.google.maps.Marker({
+                    position: {lat: latNum, lng: longNum},
+                    map: map,
+                    title: park.name
+                });
+
+      })
+  }
 
   getParks = async () => {
-    fetch('https://developer.nps.gov/api/v1/parks?parkCode=&stateCode=PA&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
+    fetch('https://developer.nps.gov/api/v1/parks?parkCode=aplo,appa,cajo,cbpo,cbgn,dele,dewa,edal,eiae,frst,flni,fone,frhi,gett,glde,hofu,inde,jofl,jthg,oire,rist,stea,thko,upde,vafo&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
       .then(results => results.json())
       .then(results => {
         this.setState({parks: results.data,})
-          console.log(results.data) // returns array of park objects
-      })
+          console.log(results.data) // returns array of 23 parks
+    })
   }
 
   //toggle visability of sidebar with button
