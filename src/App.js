@@ -19,7 +19,7 @@ class App extends React.Component {
   }    
 
   componentDidMount () {
-    this.renderMap()
+    //this.renderMap()
   }
 
   componentWillMount() {
@@ -39,31 +39,32 @@ class App extends React.Component {
         zoom: 8
       });
       
-      console.log(`parks: ${this.state.parks}`) // returns array of park objects - EMPTY...
       // this marker works
-      var marker = new window.google.maps.Marker({
+/*      var marker = new window.google.maps.Marker({
         position: {lat: 41.203323, lng: -77.194527},
         map: map,
         title: 'Center of PA'
-      });
+      });*/
 
-
+      console.log(this.state.parks) // returns array of park objects
       this.state.parks.map( park => {
         
-        console.log(`All 23 parks?: ${park}`) // returns array of park objects
-                var latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
-                var remvLat = latLong[0].slice(3); // remove lat: (returns a string)
-                var remvLong = latLong[1].slice(4); // remove long: (returns a string)
+        console.log(park) // returns EACH park object
+        console.log(park.latLong) // returns EACH park object
+
+                
+                let latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
+                let remvLat = latLong[0].slice(3); // remove lat: (returns a string)
+                let remvLong = latLong[1].slice(4); // remove long: (returns a string)
         
-                var latNum = parseFloat(remvLat); // convert to floating point
-                var longNum = parseFloat(remvLong); // convert to floating point
+                let latNum = parseFloat(remvLat); // convert to floating point
+                let longNum = parseFloat(remvLong); // convert to floating point
         
                 var marker = new window.google.maps.Marker({
                     position: {lat: latNum, lng: longNum},
                     map: map,
                     title: park.name
                 });
-
       })
   }
 
@@ -73,7 +74,7 @@ class App extends React.Component {
       .then(results => {
         this.setState({parks: results.data,})
           console.log(results.data) // returns array of 23 parks
-    })
+    }, this.renderMap())
   }
 
   //toggle visability of sidebar with button
