@@ -31,13 +31,13 @@ class App extends React.Component {
     window.initMap = this.initMap
   }
 
-
-
   initMap = () => {
       var map = new window.google.maps.Map(document.getElementById('map'), {
         center: {lat: 41.203323, lng: -77.194527},
         zoom: 8,
       });
+      
+      const bounds = new window.google.maps.LatLngBounds();
       
       // this marker works
 /*      var marker = new window.google.maps.Marker({
@@ -47,23 +47,24 @@ class App extends React.Component {
       });*/
 
       this.state.parks.map( park => {
-        console.log(park) // returns EACH park object
-        console.log(park.latLong) // returns EACH park object
-
-                
+                console.log(park.latLong);
                 let latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
-                let remvLat = latLong[0].slice(3); // remove lat: (returns a string)
-                let remvLong = latLong[1].slice(4); // remove long: (returns a string)
-        
+                let remvLat = latLong[0].slice(4); // remove lat: (returns a string)
+                let remvLong = latLong[1].slice(5); // remove long: (returns a string)
+                console.log(remvLat, remvLong);
                 let latNum = parseFloat(remvLat); // convert to floating point
                 let longNum = parseFloat(remvLong); // convert to floating point
-        
+                console.log(latNum, longNum);
                 var marker = new window.google.maps.Marker({
-                    position: {lat: latNum, lng: longNum},
+                    position: new window.google.maps.LatLng(latNum, longNum),
+                    animation: window.google.maps.Animation.DROP,
                     map: map,
                     title: park.name
                 });
+                bounds.extend(marker.position);
+                console.log(marker);
       })
+      map.fitBounds(bounds);
   }
 
   getParks = async () => {
