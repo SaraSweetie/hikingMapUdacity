@@ -42,10 +42,14 @@ class App extends React.Component {
         center: {lat: 41.203323, lng: -77.194527},
         zoom: 8,
       });
+
+      var infowindow = new window.google.maps.InfoWindow();
       
       const bounds = new window.google.maps.LatLngBounds();
-      
+
       this.state.parks.map( park => {
+        var contentString = `${park.fullName}`;
+
                 //console.log(park.latLong);
                 let latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
                 let remvLat = latLong[0].slice(4); // remove lat: (returns a string)
@@ -60,6 +64,13 @@ class App extends React.Component {
                     map: map,
                     title: park.name
                 });
+
+        marker.addListener('click', function() {
+          //update infowinow content
+          infowindow.setContent(contentString)
+          infowindow.open(map, marker);
+        });
+
                 bounds.extend(marker.position);
                 //console.log(marker);
       })
