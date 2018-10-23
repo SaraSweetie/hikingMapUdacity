@@ -18,12 +18,18 @@ class App extends React.Component {
       };
   }    
 
-  componentWillMount() {
+  componentDidMount () {
     this.getParks();
+    //this.renderMap() // moved to callback of getParks();
   }
 
-  componentDidMount () {
-    //this.renderMap()
+  getParks = async () => {
+    fetch('https://developer.nps.gov/api/v1/parks?parkCode=aplo,appa,cajo,cbpo,cbgn,dele,dewa,edal,eiae,frst,flni,fone,frhi,gett,glde,hofu,inde,jofl,jthg,oire,rist,stea,thko,upde,vafo&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
+      .then(results => results.json())
+      .then(results => {
+        this.setState({parks: results.data,})
+          //console.log(results.data) // returns array of 23 parks
+    }, this.renderMap())
   }
 
   renderMap = () => {
@@ -39,22 +45,15 @@ class App extends React.Component {
       
       const bounds = new window.google.maps.LatLngBounds();
       
-      // this marker works
-/*      var marker = new window.google.maps.Marker({
-        position: {lat: 41.203323, lng: -77.194527},
-        map: map,
-        title: 'Center of PA'
-      });*/
-
       this.state.parks.map( park => {
-                console.log(park.latLong);
+                //console.log(park.latLong);
                 let latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
                 let remvLat = latLong[0].slice(4); // remove lat: (returns a string)
                 let remvLong = latLong[1].slice(5); // remove long: (returns a string)
-                console.log(remvLat, remvLong);
+                //console.log(remvLat, remvLong);
                 let latNum = parseFloat(remvLat); // convert to floating point
                 let longNum = parseFloat(remvLong); // convert to floating point
-                console.log(latNum, longNum);
+                //console.log(latNum, longNum);
                 var marker = new window.google.maps.Marker({
                     position: new window.google.maps.LatLng(latNum, longNum),
                     animation: window.google.maps.Animation.DROP,
@@ -62,21 +61,12 @@ class App extends React.Component {
                     title: park.name
                 });
                 bounds.extend(marker.position);
-                console.log(marker);
+                //console.log(marker);
       })
       map.fitBounds(bounds);
   }
 
-  getParks = async () => {
-    fetch('https://developer.nps.gov/api/v1/parks?parkCode=aplo,appa,cajo,cbpo,cbgn,dele,dewa,edal,eiae,frst,flni,fone,frhi,gett,glde,hofu,inde,jofl,jthg,oire,rist,stea,thko,upde,vafo&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
-      .then(results => results.json())
-      .then(results => {
-        this.setState({parks: results.data,})
-          console.log(results.data) // returns array of 23 parks
-    }, this.renderMap())
-  }
-
-  //toggle visability of sidebar with button
+  //toggle visability of sidebar with Button
   menuToggle = () => {
     this.setState((prevState) => {
       return {sidebarToggle: !prevState.sidebarToggle};
