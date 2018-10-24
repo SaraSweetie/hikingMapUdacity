@@ -11,12 +11,11 @@ const Sidebar = (props) => {
         <p>visitors center</p>
         <p>trail length</p>
         <p>diffculitly</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta, est eu sodales fermentum, enim.</p>
       </div>
 
       <h2>Parks</h2>
       <ul id="filterResults">
-        <Park />
+        <Park {...props} />
       </ul>
       </section>
   );

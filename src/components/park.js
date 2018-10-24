@@ -1,12 +1,15 @@
 import React from 'react'
 
 const Park = (props) => {
-        return (
+    return (
+    	props.parks.map( park => (
             <li>
-                <h3>props.parks.name</h3>
-                <p>test text</p>
+                <h3>{park.fullName}</h3>
+                <p>Website <a href="{park.url}">{park.name}</a></p>
             </li>
-		);
+    	))
+    );
+
 }
 
 export default Park;

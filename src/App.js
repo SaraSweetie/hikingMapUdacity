@@ -14,7 +14,8 @@ class App extends React.Component {
         mapCenter: {
           lat: 41.203323,
           lng: -77.194527},
-        sidebarToggle: false
+        sidebarToggle: false,
+        markerOpen: false
       };
   }    
 
@@ -27,7 +28,7 @@ class App extends React.Component {
     fetch('https://developer.nps.gov/api/v1/parks?parkCode=aplo,appa,cajo,cbpo,cbgn,dele,dewa,edal,eiae,frst,flni,fone,frhi,gett,glde,hofu,inde,jofl,jthg,oire,rist,stea,thko,upde,vafo&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
       .then(results => results.json())
       .then(results => {
-        this.setState({parks: results.data,})
+        this.setState({parks: results.data})
           //console.log(results.data) // returns array of 23 parks
     }, this.renderMap())
   }
@@ -69,10 +70,11 @@ class App extends React.Component {
           //update infowinow content
           infowindow.setContent(contentString)
           infowindow.open(map, marker);
+          //.setState({markerOpen: true})
+          console.log(marker);
         });
 
-                bounds.extend(marker.position);
-                //console.log(marker);
+        bounds.extend(marker.position);
       })
       map.fitBounds(bounds);
   }
@@ -91,7 +93,7 @@ class App extends React.Component {
 
         <main>
           <Sidebar {...this.state} />
-          <Map {...this.state} />
+          <Map {...this.state} iwToggle={this.iwToggle} />
         </main>
       
         <Footer />
