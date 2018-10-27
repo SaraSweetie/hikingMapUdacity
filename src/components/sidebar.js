@@ -6,10 +6,10 @@ const Sidebar = (props) => {
     <section id="sidebar" className={props.sidebarToggle ? "open" : null }>
 
       <div id="filter">
-        <h2>Filter Parks</h2>
-        <button>State Park</button>
+        <h2>Filter</h2>
+        <button>State Parks</button>
         <button>Visitors center</button>
-        <button>Events</button>
+        <button>Campgrounds</button>
       </div>
 
       <h2>Parks</h2>

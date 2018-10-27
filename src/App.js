@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   getParks = async () => {
-    fetch('https://developer.nps.gov/api/v1/parks?parkCode=aplo,appa,cajo,cbpo,cbgn,dele,dewa,edal,eiae,frst,flni,fone,frhi,gett,glde,hofu,inde,jofl,jthg,oire,rist,stea,thko,upde,vafo&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf')
+    fetch('https://api.nps.gov/api/v1/parks?parkCode=aplo,appa,dele,dewa,edal,eiae,frst,flni,fone,frhi,gett,glde,hofu,inde,jofl,oire,rist,stea,thko,upde,vafo&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf%2CCO%2CNM%2CUT&limit=70&fields=images&sort=name')
       .then(results => results.json())
       .then(results => {
         this.setState({parks: results.data})

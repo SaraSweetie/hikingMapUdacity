@@ -52,6 +52,8 @@ header button {
 
 /* --- Sidebar Styles --- */
 #sidebar {
+  display: flex;
+  flex-direction: column;
   width: 40%;
   padding: 2.5%;
   background-color: #f5f5f5;
@@ -75,14 +77,12 @@ header button {
   padding: 2%;
 }
 
-button {
-  align-self:flex-end;
-  width: 25%;
+#filter button {
   height: 80px;
+  width: 30%;
   margin: 1%;
   background-color:#282c34;
   color: #ffffff;
-  font-size: 1em;
 }
 /* --- Map Styles --- */
 /* Always set the map height explicitly to define the size of the div
