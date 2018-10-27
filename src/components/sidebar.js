@@ -7,10 +7,9 @@ const Sidebar = (props) => {
 
       <div id="filter">
         <h2>Filter Parks</h2>
-        <p>State Park</p>
-        <p>visitors center</p>
-        <p>trail length</p>
-        <p>diffculitly</p>
+        <button>State Park</button>
+        <button>Visitors center</button>
+        <button>Events</button>
       </div>
 
       <h2>Parks</h2>
