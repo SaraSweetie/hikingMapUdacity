@@ -11,9 +11,11 @@ class App extends React.Component {
     super(props);
       this.state = {
         parks: [],
+        //center of PA to start
         mapCenter: {
           lat: 41.203323,
           lng: -77.194527},
+        zoom: 8,
         sidebarToggle: false,
         markerOpen: false
       };
@@ -40,8 +42,8 @@ class App extends React.Component {
 
   initMap = () => {
       var map = new window.google.maps.Map(document.getElementById('map'), {
-        center: {lat: 41.203323, lng: -77.194527},
-        zoom: 8,
+        center: {lat: this.state.mapCenter.lat, lng: this.state.mapCenter.lng},
+        zoom: this.state.zoom,
       });
 
       var infowindow = new window.google.maps.InfoWindow();
