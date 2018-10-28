@@ -84,6 +84,37 @@ header button {
   background-color:#282c34;
   color: #ffffff;
 }
+/* --- Results/ List Styles --- */
+#filterResults div {
+  margin-top: 20px;
+  padding: 2%;
+  border: 1px solid #000000;
+  background-color: #ffffff;
+}
+
+#sidebar  h3 {
+  font-size: 1em;
+}
+
+#sidebar img {
+  width: 100%;
+}
+
+#sidebar figcaption {
+ font-size: .8em;
+ color:#333;
+}
+
+#sidebar p {
+  font-size: .8em;
+}
+
+#sidebar a {
+  color:#000000;
+  text-decoration:none;
+}
+
+
 /* --- Map Styles --- */
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -109,7 +140,7 @@ footer p, footer a {
   text-decoration:none;
 }
 
-footer a:hover {
+footer a:hover, #sidebar a:hover {
   text-decoration: dotted;
   color: orange;
 }

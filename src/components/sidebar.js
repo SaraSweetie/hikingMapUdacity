@@ -13,9 +13,9 @@ const Sidebar = (props) => {
       </div>
 
       <h2>Parks</h2>
-      <ul id="filterResults">
+      <section id="filterResults">
         <Park {...props} />
-      </ul>
+      </section>
       </section>
   );
 }

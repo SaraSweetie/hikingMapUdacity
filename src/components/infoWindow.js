@@ -1,8 +1,7 @@
 import React from 'react'
 
-const Park = (props) => {
+const InfoWindow = (park) => {
     return (
-    	props.parks.map( park => (
             <div>
             	<h3>{park.fullName}</h3>
             	<figure>
@@ -11,9 +10,8 @@ const Park = (props) => {
             	</figure>
                 <p>Learn more: <a href={park.url}>{park.name}</a></p>
             </div>
-    	))
     );
 
 }
 
-export default Park;
+export default InfoWindow;

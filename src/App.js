@@ -3,7 +3,7 @@ import './App.css'
 import Header from './components/header'
 import Sidebar from './components/sidebar'
 import Map from './components/map'
-import * as Utils from "./Utils/index.js";
+import * as Utils from "./Utils/index.js"
 import Footer from './components/footer'
 
 class App extends React.Component {
@@ -49,7 +49,8 @@ class App extends React.Component {
       const bounds = new window.google.maps.LatLngBounds();
 
       this.state.parks.map( park => {
-        var contentString = `${park.fullName}`;
+        var contentString = `<h2>${park.fullName}</h2>
+                            <p>${park.description} <a href="${park.directionsUrl}">Directions</a></p>`;
 
                 //console.log(park.latLong);
                 let latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
