@@ -77,14 +77,13 @@ class App extends React.Component {
           infowindow.setContent(contentString)
           infowindow.open(map, marker);
 
+          this.setState({iwOpen: true});
           console.log(marker);
           console.log(index);
         });
 
         bounds.extend(marker.position);
       })
-      //trying to set state for when infowindows are open
-      //this.setState({iwOpen: true}); //this isn't working causing an error...
       map.fitBounds(bounds);
   }
 
@@ -96,8 +95,10 @@ class App extends React.Component {
   }
 
   //close info window when map clicked
-  iwClose = () => {
-    this.setState({iwOpen: false});
+  iwClose = (map) => {
+    map.onClick = () => {
+      this.setState({iwOpen: false});
+    }
   }
 
   //handle Sidebar Clicking
