@@ -7,9 +7,10 @@ const Sidebar = (props) => {
 
       <div id="filter">
         <h2>Filter</h2>
-        <button>State Parks</button>
-        <button>Visitors center</button>
-        <button>Campgrounds</button>
+        <input type="search" id="search" placeholder="Search Parks" 
+          onChange={e => props.updateQuery(e.target.value)}
+          value={props.searchQuery}
+        />
       </div>
 
       <h2>Parks</h2>

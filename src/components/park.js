@@ -2,8 +2,8 @@ import React from 'react'
 
 const Park = (props) => {
     return (
-    	props.parks.map( park => (
-            <div id={park.parkCode} key={park.parkCode} tabIndex="1" >
+    	props.parks.map( (park, index) => (
+            <div id={park.parkCode} key={index} tabIndex="1" >
             	<h3>{park.fullName}</h3>
             	<figure>
             		<img src={park.images[0].url} alt={park.images[0].altText}/>

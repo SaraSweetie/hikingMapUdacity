@@ -19,7 +19,8 @@ class App extends React.Component {
           lat: 41.203323,
           lng: -77.194527},
         zoom: 8,
-        sidebarToggle: false
+        sidebarToggle: false,
+        searchQuery: ''
       };
   }    
 
@@ -78,6 +79,7 @@ class App extends React.Component {
           infowindow.open(map, marker);
 
           this.setState({iwOpen: true});
+
           console.log(marker);
           console.log(index);
         });
@@ -95,7 +97,7 @@ class App extends React.Component {
   }
 
   //close info window when map clicked
-  iwClose = (map) => {
+  iwClose = (map, infowindow) => {
     map.onClick = () => {
       this.setState({iwOpen: false});
     }
@@ -106,14 +108,19 @@ class App extends React.Component {
     console.log(park)
   }
 
+  //sidebar search
+  updateQuery = (newQuery) => {
+    this.setState({ searchQuery: newQuery });
+  }
+
   render() {
     return (
       <div className="App">
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} handleListClick={this.handleListClick}/>
-          <Map role="application" aria-label="map" {...this.state} onClick={this.iwClose} />
+          <Sidebar {...this.state} onChange={this.updateQuery} handleListClick={this.handleListClick}/>
+          <Map role="application" aria-label="map" {...this.state} onCloseClick={this.iwClose} />
         </main>
       
         <Footer />

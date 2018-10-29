@@ -77,6 +77,13 @@ header button {
   padding: 2%;
 }
 
+#search {
+  width:100%;
+  padding: 3%;
+  margin: 2% 0;
+  font-size:1em;
+}
+
 #filter button {
   height: 80px;
   width: 30%;
