@@ -3,8 +3,8 @@ import React from 'react'
 const Map = (props) => {
 	return (
     	<div id="map"
-    		onClick={props.iwToggle}
-        	onKeyPress={props.iwToggle}>
+    		onClick={props.iwClose}
+        	onKeyPress={props.iwClose}>
        	</div>
     );
 }

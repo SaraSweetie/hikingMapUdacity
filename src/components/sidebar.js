@@ -13,9 +13,9 @@ const Sidebar = (props) => {
       </div>
 
       <h2>Parks</h2>
-      <section id="filterResults">
-        <Park {...props} />
-      </section>
+        <section id="filterResults">
+          <Park {...props} handleListClick={props.handleListClick}/>
+        </section>
       </section>
   );
 }

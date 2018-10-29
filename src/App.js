@@ -11,13 +11,15 @@ class App extends React.Component {
     super(props);
       this.state = {
         parks: [],
+        markers: [],
+        activeMarker: null,
+        iwOpen: false,
         //center of PA to start
         mapCenter: {
           lat: 41.203323,
           lng: -77.194527},
         zoom: 8,
-        sidebarToggle: false,
-        markerOpen: false
+        sidebarToggle: false
       };
   }    
 
@@ -31,7 +33,7 @@ class App extends React.Component {
       .then(results => results.json())
       .then(results => {
         this.setState({parks: results.data})
-          //console.log(results.data) // returns array of 23 parks
+          //console.log(results.data) // returns array of parks
     }, this.renderMap())
   }
 
@@ -50,7 +52,7 @@ class App extends React.Component {
       
       const bounds = new window.google.maps.LatLngBounds();
 
-      this.state.parks.map( park => {
+      this.state.parks.map( (park, index) => {
         var contentString = `<h2>${park.fullName}</h2>
                             <p>${park.description} <a href="${park.directionsUrl}">Directions</a></p>`;
 
@@ -66,19 +68,23 @@ class App extends React.Component {
                     position: new window.google.maps.LatLng(latNum, longNum),
                     animation: window.google.maps.Animation.DROP,
                     map: map,
+                    key: index,
                     title: park.name
                 });
 
-        marker.addListener('click', function() {
+        marker.addListener('click', () => {
           //update infowinow content
           infowindow.setContent(contentString)
           infowindow.open(map, marker);
-          //.setState({markerOpen: true})
+
           console.log(marker);
+          console.log(index);
         });
 
         bounds.extend(marker.position);
       })
+      //trying to set state for when infowindows are open
+      //this.setState({iwOpen: true}); //this isn't working causing an error...
       map.fitBounds(bounds);
   }
 
@@ -89,14 +95,24 @@ class App extends React.Component {
     });
   }
 
+  //close info window when map clicked
+  iwClose = () => {
+    this.setState({iwOpen: false});
+  }
+
+  //handle Sidebar Clicking
+  handleListClick = park => {
+    console.log(park)
+  }
+
   render() {
     return (
       <div className="App">
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} />
-          <Map {...this.state} iwToggle={this.iwToggle} />
+          <Sidebar {...this.state} handleListClick={this.handleListClick}/>
+          <Map role="application" aria-label="map" {...this.state} onClick={this.iwClose} />
         </main>
       
         <Footer />
