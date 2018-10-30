@@ -82,8 +82,8 @@ class App extends React.Component {
 
           this.setState({iwOpen: true});
 
-          console.log(marker);
-          console.log(index);
+          //console.log(marker);
+          //console.log(index);
         });
 
         bounds.extend(marker.position);
@@ -112,12 +112,15 @@ class App extends React.Component {
 
   //sidebar search
   updateQuery = (newQuery) => {
+    //gets search terms from input in sidebar
     this.setState({ searchQuery: newQuery });
   }
 
   //filtered (searched) parks
-  filterParks = (parks, searchQuery) => {
-    return parks.filter(park => park.fullName.toLowerCase().includes(searchQuery.toLowerCase()));
+  filterParks = (parks, newQuery) => {
+    //parks is an empty array...
+      console.log(parks)
+    return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
   }
 
   render() {
@@ -126,7 +129,7 @@ class App extends React.Component {
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} updateQuery={this.updateQuery}/>
+          <Sidebar {...this.state} updateQuery={this.updateQuery} />
           <Map role="application" aria-label="map" {...this.state}/>
         </main>
       
