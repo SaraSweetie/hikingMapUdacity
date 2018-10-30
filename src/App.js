@@ -28,6 +28,7 @@ class App extends React.Component {
   componentDidMount () {
     this.getParks();
     //this.renderMap() // moved to callback of getParks();
+    var parks = this.state.parks;
   }
 
   getParks = async () => {
@@ -44,7 +45,7 @@ class App extends React.Component {
     window.initMap = this.initMap
   }
 
-  initMap = () => {
+  initMap = (parks) => {
       var map = new window.google.maps.Map(document.getElementById('map'), {
         center: {lat: this.state.mapCenter.lat, lng: this.state.mapCenter.lng},
         zoom: this.state.zoom,
@@ -122,13 +123,22 @@ class App extends React.Component {
     );
   }
 
-  //filtered (searched) parks
   filterParks = (parks, newQuery) => {
     //parks from componentDidMount, newQuery from sarch update
-    console.log(parks)
     console.log(newQuery)
+    console.log(this.state.parks)
     console.log(this.state.filteredSearch)
-    return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
+
+    if (this.state.searchQuery.trim() !== '' && this.state.searchQuery.trim() !== undefined){
+      return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
+      this.setState({parks: this.state.filteredSearch})
+    } else {
+      console.log("message");
+      this.setState({
+        parks: this.state.parks,
+        filteredSearch: null
+      });
+    }
   }
 
   render() {
