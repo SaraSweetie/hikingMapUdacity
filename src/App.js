@@ -119,7 +119,7 @@ class App extends React.Component {
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} onChange={this.updateQuery} handleListClick={this.handleListClick}/>
+          <Sidebar {...this.state} updateQuery={this.updateQuery} handleListClick={this.handleListClick}/>
           <Map role="application" aria-label="map" {...this.state} onCloseClick={this.iwClose} />
         </main>
       
