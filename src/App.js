@@ -28,7 +28,6 @@ class App extends React.Component {
   componentDidMount () {
     this.getParks();
     //this.renderMap() // moved to callback of getParks();
-    this.setState({filteredSearch: this.filterParks(this.state.parks)});
   }
 
   getParks = async () => {
@@ -117,13 +116,18 @@ class App extends React.Component {
   //sidebar search
   updateQuery = (newQuery) => {
     //gets search terms from input in sidebar
-    this.setState({ searchQuery: newQuery });
+    this.setState({ 
+      searchQuery: newQuery,
+      filteredSearch: this.filterParks(this.state.parks, this.state.searchQuery)}
+    );
   }
 
   //filtered (searched) parks
   filterParks = (parks, newQuery) => {
-    //parks is an empty array...
-      //console.log(parks)
+    //parks from componentDidMount, newQuery from sarch update
+    console.log(parks)
+    console.log(newQuery)
+    console.log(this.state.filteredSearch)
     return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
   }
 
