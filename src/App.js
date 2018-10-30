@@ -128,16 +128,17 @@ class App extends React.Component {
     console.log(newQuery)
     console.log(this.state.parks)
     console.log(this.state.filteredSearch)
+    console.log(this.state.searchQuery.length)
 
-    if (this.state.searchQuery.trim() !== '' && this.state.searchQuery.trim() !== undefined){
+    if (this.state.searchQuery.trim() !== '' || this.state.searchQuery !== undefined ){
       return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
       this.setState({parks: this.state.filteredSearch})
-    } else {
-      console.log("message");
+    }if (this.state.searchQuery.length <= 1) {
       this.setState({
         parks: this.state.parks,
         filteredSearch: null
       });
+      console.log("search emptied");
     }
   }
 
