@@ -7,7 +7,7 @@ const Sidebar = (props) => {
 
       <div id="filter">
         <h2>Filter</h2>
-        <input type="search" id="search" placeholder="Search Parks" 
+        <input type="search" id="search" aria-label="Search the parks" placeholder="Search Parks" 
           value={props.searchQuery}
           onChange={(e) => props.updateQuery(e.target.value)}
         />
@@ -15,7 +15,7 @@ const Sidebar = (props) => {
 
       <h2>Parks</h2>
         <section id="filterResults">
-          <Park {...props} handleListClick={props.handleListClick}/>
+          <Park {...props}/>
         </section>
       </section>
   );

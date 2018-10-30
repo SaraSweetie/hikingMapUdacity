@@ -6,11 +6,11 @@ const Header = (props) => {
     return (
       <header className="App-header">
         <div id="logo">
-          <img src={Logo} alt="Hike PA logo" />
+          <img src={Logo} alt="logo" />
         </div>
         
         <div id="tagline">
-          <h1>Hike PA</h1>
+          <h1>PA State Parks</h1>
         </div>
         
         <button id="menu"

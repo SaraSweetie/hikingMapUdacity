@@ -20,13 +20,15 @@ class App extends React.Component {
           lng: -77.194527},
         zoom: 8,
         sidebarToggle: false,
-        searchQuery: ''
+        searchQuery: '',
+        filteredSearch: null
       };
   }    
 
   componentDidMount () {
     this.getParks();
     //this.renderMap() // moved to callback of getParks();
+    this.setState({filteredSearch: this.filterParks(this.state.parks)});
   }
 
   getParks = async () => {
@@ -113,14 +115,19 @@ class App extends React.Component {
     this.setState({ searchQuery: newQuery });
   }
 
+  //filtered (searched) parks
+  filterParks = (parks, searchQuery) => {
+    return parks.filter(park => park.fullName.toLowerCase().includes(searchQuery.toLowerCase()));
+  }
+
   render() {
     return (
       <div className="App">
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} updateQuery={this.updateQuery} handleListClick={this.handleListClick}/>
-          <Map role="application" aria-label="map" {...this.state} onCloseClick={this.iwClose} />
+          <Sidebar {...this.state} updateQuery={this.updateQuery}/>
+          <Map role="application" aria-label="map" {...this.state}/>
         </main>
       
         <Footer />
