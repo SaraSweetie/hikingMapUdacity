@@ -15,7 +15,7 @@ const Sidebar = (props) => {
 
       <h2>Parks</h2>
         <section id="filterResults">
-          <Park {...props}/>
+          <Park {...props} listClick={props.listClick}/>
         </section>
       </section>
   );

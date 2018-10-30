@@ -81,7 +81,7 @@ class App extends React.Component {
           infowindow.open(map, marker);
 
           this.setState({iwOpen: true});
-
+          this.markerClick(marker);
           //console.log(marker);
           //console.log(index);
         });
@@ -104,10 +104,14 @@ class App extends React.Component {
       this.setState({iwOpen: false});
     }
   }
+  //handle Marker Clicks
+  markerClick = marker => {
+    console.log(marker.key) // returns key of marker
+  }
 
   //handle Sidebar Clicking
-  handleListClick = park => {
-    console.log(park)
+  listClick = key => {
+    console.log(key) // returns key of park
   }
 
   //sidebar search
@@ -119,7 +123,7 @@ class App extends React.Component {
   //filtered (searched) parks
   filterParks = (parks, newQuery) => {
     //parks is an empty array...
-      console.log(parks)
+      //console.log(parks)
     return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
   }
 
@@ -129,7 +133,7 @@ class App extends React.Component {
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} updateQuery={this.updateQuery} />
+          <Sidebar {...this.state} updateQuery={this.updateQuery} listClick={this.listClick}/>
           <Map role="application" aria-label="map" {...this.state}/>
         </main>
       
