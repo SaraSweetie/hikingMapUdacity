@@ -30,15 +30,15 @@ html, body, main {
 }
 
 h1 {
-  display: inline-block;
   font-size: 1em;
   color:#ffffff;
   margin-left: 25px;
-  text-align: center;
+  margin-top: 20px;
 }
 
 #tagline {
   flex-grow:3;
+  display: flex;
 }
 
 header button {
@@ -156,6 +156,45 @@ footer a:hover, #sidebar a:hover {
 
 /* Small View */
 @media only screen and (max-width: 450px) {
+/* --- header --- */
+  .App-header {
+    height: 70px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    font-size: 2em;
+  }
+  #logo {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  #logo img {
+    width: 100px;
+    padding: 5%;
+  }
+  h1 {
+    float: left;
+    font-size: .8em;
+    margin-left: 5px;
+  }
+  #tagline {
+    flex-grow:1;
+    float: left;
+    font-size: .8em;
+    margin-left: 5px;
+    text-align: left;
+  }
+  header button {
+    width: 65px;
+    height: 65px;
+    top: 12px;
+    right:20px;
+  }
+
 /* sidebar */
   #sidebar {
     display: flex;
