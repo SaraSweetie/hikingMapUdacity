@@ -19,5 +19,5 @@ Note create-react-app was used to start this project. To access the service work
 - National Park Service - [API Guides](https://www.nps.gov/subjects/developer/guides.htm)
 - [Yahya Elharony - Neighborhood Map playlist](https://www.youtube.com/channel/UCcWSbBe_s-T_gZRnqFbtyIA) - not using any libraries
 -[Making Google Maps work with React](https://www.klaasnotfound.com/2016/11/06/making-google-maps-work-with-react/) - article
-- [FEND P7 Walkthrough with Doug Brown](https://www.youtube.com/watch?v=NVAVLCJwAAo&feature=youtu.be) and his corresponding Git code/branch
+- [FEND P7 Walkthrough with Doug Brown](https://www.youtube.com/watch?v=NVAVLCJwAAo&feature=youtu.be) and his corresponding [Git code/branch](https://github.com/thefinitemonkey/fend-maps-walkthrough)
 - [Forest Walker - Neighborhood Map playlist](https://www.youtube.com/playlist?list=PL4rQq4MQP1crXuPtruu_eijgOUUXhcUCP)
