@@ -12,7 +12,7 @@ class App extends React.Component {
       this.state = {
         parks: [],
         markers: [],
-        activeMarker: null,
+        activeMarker: {},
         iwOpen: false,
         //center of PA to start
         mapCenter: {
@@ -82,9 +82,13 @@ class App extends React.Component {
           infowindow.setContent(contentString)
           infowindow.open(map, marker);
 
-          this.setState({iwOpen: true});
+          this.setState({
+            iwOpen: true,
+            activeMarker: marker
+          });
           this.markerClick(marker);
           //console.log(marker);
+          //console.log(this.state.activeMarker);
           //console.log(index);
         });
 
@@ -133,7 +137,7 @@ class App extends React.Component {
 
     if (this.state.searchQuery.trim() !== '' || this.state.searchQuery !== undefined ){
       return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
-      this.setState({parks: this.state.filteredSearch})
+      //this.setState({parks: this.state.filteredSearch}) // this breaks it?
     }if (this.state.searchQuery.length <= 1) {
       this.setState({
         parks: this.state.parks,
