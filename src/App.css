@@ -73,7 +73,6 @@ header button {
 }
 
 #sidebar #filterResults {
-  list-style-type: none;
   width: 94%;
   padding: 2%;
 }
@@ -151,4 +150,74 @@ footer p, footer a {
 footer a:hover, #sidebar a:hover {
   text-decoration: dotted;
   color: orange;
+}
+
+/* --- Responsive Sizes --- */
+
+/* Small View */
+@media only screen and (max-width: 450px) {
+/* sidebar */
+  #sidebar {
+    display: flex;
+    flex-direction:column;
+    width: 95%;
+    padding: 2.5%;
+    height: 250px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    z-index: 1;
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+    transition: transform 0.3s ease;
+  }
+  #sidebar.open {
+    -webkit-transform: translate(125%, 0);
+    transform: translate(125%,0);
+  }
+  #filterResults {
+    width: 94%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+  #filterResults div {
+    margin-top: 5px;
+    padding: 2%;
+    margin: 2%;
+    width: 200px;
+  }
+  #sidebar  h3 {
+    font-size: .8em;
+  }
+  #sidebar img {
+    width: 40%;
+    float: right;
+    margin: 2%;
+  }
+  #sidebar figcaption {
+   display: none;
+  }
+}
+
+/* Large View */
+@media only screen and (min-width: 900px) {
+/* sidebar */
+  #sidebar {
+    display: flex;
+    flex-direction:column;
+  }
+  #filterResults {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: flex-start;
+  }
+  #filterResults div {
+    margin-top: 5px;
+    padding: 2%;
+    margin: 2%;
+    width: 40%;
+  }
 }

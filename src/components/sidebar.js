@@ -6,7 +6,6 @@ const Sidebar = (props) => {
     <section id="sidebar" className={props.sidebarToggle ? "open" : null }>
 
       <div id="filter">
-        <h2>Filter</h2>
         <input type="search" id="search" aria-label="Search the parks" placeholder="Search Parks" 
           value={props.searchQuery}
           onChange={(e) => props.updateQuery(e.target.value)}
