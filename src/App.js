@@ -132,7 +132,7 @@ class App extends React.Component {
 
     if (this.state.searchQuery.trim() !== '' || this.state.searchQuery !== undefined ){
       return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
-      this.setState({parks: this.state.filteredSearch})
+      // this.setState({parks: this.state.filteredSearch}) // this isn't doing what I want it to
     }if (this.state.searchQuery.length <= 1) {
       this.setState({
         parks: this.state.parks,
