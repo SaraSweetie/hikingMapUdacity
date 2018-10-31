@@ -53,7 +53,9 @@ class App extends React.Component {
         zoom: this.state.zoom,
       });
 
-      var infowindow = new window.google.maps.InfoWindow();
+      var infowindow = new window.google.maps.InfoWindow({
+        maxWidth: 250
+      });
       
       const bounds = new window.google.maps.LatLngBounds();
 
@@ -81,6 +83,8 @@ class App extends React.Component {
           //update infowinow content
           infowindow.setContent(contentString)
           infowindow.open(map, marker);
+          map.setCenter(marker.getPosition());
+          //map.setZoom(10);
 
           this.setState({
             iwOpen: true,
@@ -91,6 +95,13 @@ class App extends React.Component {
           //console.log(this.state.activeMarker);
           //console.log(index);
         });
+
+          //console.log(marker);
+          // this is the active marker not all markers...
+          //How do I get all markers?
+          //var allMarkers;
+          //marker.push(allMarkers);
+          //this.setState({markers: allMarkers});
 
         bounds.extend(marker.position);
       })
@@ -118,6 +129,7 @@ class App extends React.Component {
   //handle Sidebar Clicking
   listClick = key => {
     console.log(key) // returns key of park
+    this.markerClick(this.state.markers[key]);
   }
 
   //sidebar search
