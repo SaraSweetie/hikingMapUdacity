@@ -2,7 +2,7 @@ import React from 'react'
 
 const Park = (props) => {
     return (
-    	props.parks.map( (park, key) => (
+    	props.filteredSearch.map( (park, key) => (
             <div onClick={ () => props.listClick(key)}
                 id={park.parkCode} key={key} tabIndex="0" >
             	<h3>{park.fullName}</h3>

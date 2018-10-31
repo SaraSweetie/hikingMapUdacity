@@ -21,21 +21,23 @@ class App extends React.Component {
         zoom: 8,
         sidebarToggle: false,
         searchQuery: '',
-        filteredSearch: null
+        filteredSearch: []
       };
   }    
 
   componentDidMount () {
     this.getParks();
     //this.renderMap() // moved to callback of getParks();
-    var parks = this.state.parks;
   }
 
   getParks = async () => {
     fetch('https://api.nps.gov/api/v1/parks?parkCode=aplo,appa,dele,dewa,edal,eiae,frst,flni,fone,frhi,gett,glde,hofu,inde,jofl,oire,rist,stea,thko,upde,vafo&api_key=FMZGAe5Z3Ul0VSW28IfUmTBXwaFYjBDQ6Wpw2Rsf%2CCO%2CNM%2CUT&limit=70&fields=images&sort=name')
       .then(results => results.json())
       .then(results => {
-        this.setState({parks: results.data})
+        this.setState({
+          parks: results.data,
+          filteredSearch: results.data
+        })
           //console.log(results.data) // returns array of parks
     }, this.renderMap())
   }
@@ -125,20 +127,18 @@ class App extends React.Component {
 
   filterParks = (parks, newQuery) => {
     //parks from componentDidMount, newQuery from sarch update
-    console.log(newQuery)
-    console.log(this.state.parks)
-    console.log(this.state.filteredSearch)
-    console.log(this.state.searchQuery.length)
+    //console.log(this.state.parks)
+    //console.log(this.state.filteredSearch)
+    //console.log(this.state.searchQuery.length)
 
     if (this.state.searchQuery.trim() !== '' || this.state.searchQuery !== undefined ){
       return parks.filter(park => park.fullName.toLowerCase().includes(newQuery.toLowerCase()));
-      // this.setState({parks: this.state.filteredSearch}) // this isn't doing what I want it to
+      this.setState({parks: this.state.filteredSearch})
     }if (this.state.searchQuery.length <= 1) {
       this.setState({
         parks: this.state.parks,
-        filteredSearch: null
+        filteredSearch: []
       });
-      console.log("search emptied");
     }
   }
 
