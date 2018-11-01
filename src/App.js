@@ -52,12 +52,14 @@ class App extends React.Component {
         center: {lat: this.state.mapCenter.lat, lng: this.state.mapCenter.lng},
         zoom: this.state.zoom,
       });
-
+      
       var infowindow = new window.google.maps.InfoWindow({
         maxWidth: 250
       });
       
       const bounds = new window.google.maps.LatLngBounds();
+      
+      const allMarkers = [];
 
       this.state.parks.map( (park, index) => {
         var contentString = `<h2>${park.fullName}</h2>
@@ -79,6 +81,9 @@ class App extends React.Component {
                     title: park.name
                 });
 
+        //marker.push(allMarkers);
+        //this.setState({markers: allMarkers});
+
         marker.addListener('click', () => {
           //update infowinow content
           infowindow.setContent(contentString)
@@ -95,13 +100,8 @@ class App extends React.Component {
           //console.log(this.state.activeMarker);
           //console.log(index);
         });
-
-          //console.log(marker);
-          // this is the active marker not all markers...
-          //How do I get all markers?
-          //var allMarkers;
-          //marker.push(allMarkers);
-          //this.setState({markers: allMarkers});
+        allMarkers.push(marker);
+        this.setState({markers: allMarkers});
 
         bounds.extend(marker.position);
       })
@@ -124,12 +124,16 @@ class App extends React.Component {
   //handle Marker Clicks
   markerClick = marker => {
     console.log(marker.key) // returns key of marker
+    this.setState({sidebarToggle: true});
+
+    //find this.state.markers[key] === marker.key
+    //add focus CSS class
   }
 
   //handle Sidebar Clicking
   listClick = key => {
     console.log(key) // returns key of park
-    this.markerClick(this.state.markers[key]);
+    //this.markerClick(this.state.markers[key]);
   }
 
   //sidebar search
