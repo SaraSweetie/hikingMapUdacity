@@ -65,48 +65,42 @@ class App extends React.Component {
         var contentString = `<h2>${park.fullName}</h2>
                             <p>${park.description} <a href="${park.directionsUrl}">Directions</a></p>`;
 
-                //console.log(park.latLong);
-                let latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
-                let remvLat = latLong[0].slice(4); // remove lat: (returns a string)
-                let remvLong = latLong[1].slice(5); // remove long: (returns a string)
-                //console.log(remvLat, remvLong);
-                let latNum = parseFloat(remvLat); // convert to floating point
-                let longNum = parseFloat(remvLong); // convert to floating point
-                //console.log(latNum, longNum);
-                var marker = new window.google.maps.Marker({
-                    position: new window.google.maps.LatLng(latNum, longNum),
-                    animation: window.google.maps.Animation.DROP,
-                    map: map,
-                    key: index,
-                    title: park.name
-                });
-
-        //marker.push(allMarkers);
-        //this.setState({markers: allMarkers});
+        //console.log(park.latLong);
+          let latLong = park.latLong.split(', '); // splits latLong into two at , stores in an array
+          let remvLat = latLong[0].slice(4); // remove lat: (returns a string)
+          let remvLong = latLong[1].slice(5); // remove long: (returns a string)
+          //console.log(remvLat, remvLong);
+          let latNum = parseFloat(remvLat); // convert to floating point
+          let longNum = parseFloat(remvLong); // convert to floating point
+          //console.log(latNum, longNum);
+        var marker = new window.google.maps.Marker({
+          position: new window.google.maps.LatLng(latNum, longNum),
+          animation: window.google.maps.Animation.DROP,
+          map: map,
+          key: index,
+          title: park.name,
+          visible: true
+        });
 
         marker.addListener('click', () => {
-          //update infowinow content
-          infowindow.setContent(contentString)
+          //update infowindow content
+          infowindow.setContent(contentString);
           infowindow.open(map, marker);
           map.setCenter(marker.getPosition());
           //map.setZoom(10);
-
-          this.setState({
-            iwOpen: true,
-            activeMarker: marker
-          });
-          this.markerClick(marker);
-          //console.log(marker);
-          //console.log(this.state.activeMarker);
-          //console.log(index);
+          
+          //this.markerClick(marker);
         });
+
+        //push all markers to state to use outside of initMap()
         allMarkers.push(marker);
         this.setState({markers: allMarkers});
 
         bounds.extend(marker.position);
-      })
+      });//end mapping over parks
+
       map.fitBounds(bounds);
-  }
+  }//end initMap()
 
   //toggle visability of sidebar with Button
   menuToggle = () => {
@@ -116,24 +110,32 @@ class App extends React.Component {
   }
 
   //close info window when map clicked
-  iwClose = (map, infowindow) => {
-    map.onClick = () => {
-      this.setState({iwOpen: false});
-    }
-  }
-  //handle Marker Clicks
-  markerClick = marker => {
-    console.log(marker.key) // returns key of marker
-    this.setState({sidebarToggle: true});
+  //iwClose = (marker) => {
+    //console.log('info window closed');
+    //marker.setVisible(false);
+    //marker.infoWindow.close();
+    //this.setState({iwOpen: false});
+  //}
 
-    //find this.state.markers[key] === marker.key
-    //add focus CSS class
+  //handle Marker Clicks
+  markerClick = (marker) => {
+    //console.log(marker.key) // returns key of marker
+    //marker.setVisible(true);
+    this.setState({
+      iwOpen: true,
+      activeMarker: marker
+    });
   }
 
   //handle Sidebar Clicking
   listClick = key => {
-    console.log(key) // returns key of park
-    //this.markerClick(this.state.markers[key]);
+    //console.log(key) // returns key of park
+    //console.log(this.state.markers[key].key);
+    const marker = this.state.markers.find(marker => marker.key === key);
+
+    marker.setAnimation(4);
+    window.google.maps.event.trigger(marker,'click');
+    //this.markerClick(marker);
   }
 
   //sidebar search
@@ -143,6 +145,9 @@ class App extends React.Component {
       searchQuery: newQuery,
       filteredSearch: this.filterParks(this.state.parks, this.state.searchQuery)}
     );
+    //update markers to match search filtered
+    //build a function to take list of markers and a query parameter
+    //set visible the markers that matched that parameter
   }
 
   filterParks = (parks, newQuery) => {

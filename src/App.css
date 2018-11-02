@@ -99,11 +99,6 @@ header button {
   background-color: #ffffff;
 }
 
-.focus {
-  border: 1px solid orange;
-  background-color: red;
-}
-
 #sidebar  h3 {
   font-size: 1em;
 }
