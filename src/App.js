@@ -79,12 +79,11 @@ class App extends React.Component {
           map: map,
           key: index,
           title: park.name,
-          visible: true
         });
 
         marker.addListener('click', () => {
           //update infowindow content
-          infowindow.setContent(contentString);
+          infowindow.setContent(contentString)
           infowindow.open(map, marker);
           map.setCenter(marker.getPosition());
           //map.setZoom(10);
@@ -100,7 +99,7 @@ class App extends React.Component {
       })//end mapping over parks
 
       map.fitBounds(bounds);
-  }//end initMap()
+  }; //end initMap
 
   //toggle visability of sidebar with Button
   menuToggle = () => {
