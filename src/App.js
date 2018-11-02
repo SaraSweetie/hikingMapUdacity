@@ -78,7 +78,7 @@ class App extends React.Component {
           animation: window.google.maps.Animation.DROP,
           map: map,
           key: index,
-          title: park.name,
+          name: park.name,
         });
 
         marker.addListener('click', () => {
@@ -153,13 +153,18 @@ class App extends React.Component {
   //update markers after sidebar filter changed
   updateMarkers = (key) => {
     console.log(this.state.filteredSearch); //get name
-    console.log(this.state.markers); // get title
+    console.log(this.state.markers); // get name
 
-    const markers = this.state.markers.map(marker => marker.title === this.state.filteredSearch.name);
-    console.log("update the markers")
-    console.log(markers); // getting an array of all true or all false??
+    const filteredMarkers = this.state.markers.map(marker => {
+      console.log("update the markers")
+
+      let match = marker.name === this.state.filteredSearch.name
+
+      return filteredMarkers;
+    });
+    console.log(filteredMarkers); // getting an array of all undefined
     this.setState({ 
-      markers: markers,
+      markers: filteredMarkers
     });
 
   }
