@@ -88,7 +88,7 @@ class App extends React.Component {
           map.setCenter(marker.getPosition());
           //map.setZoom(10);
           
-          //this.markerClick(marker);
+          this.markerClick(marker);
         });
 
         //push all markers to state to use outside of initMap()
@@ -147,6 +147,21 @@ class App extends React.Component {
     //update markers to match search filtered
     //build a function to take list of markers and a query parameter
     //set visible the markers that matched that parameter
+    this.updateMarkers();
+  }
+
+  //update markers after sidebar filter changed
+  updateMarkers = (key) => {
+    console.log(this.state.filteredSearch); //get name
+    console.log(this.state.markers); // get title
+
+    const markers = this.state.markers.map(marker => marker.title === this.state.filteredSearch.name);
+    console.log("update the markers")
+    console.log(markers); // getting an array of all true or all false??
+    this.setState({ 
+      markers: markers,
+    });
+
   }
 
   filterParks = (parks, newQuery) => {
@@ -172,7 +187,7 @@ class App extends React.Component {
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} updateQuery={this.updateQuery} listClick={this.listClick}/>
+          <Sidebar {...this.state} updateQuery={this.updateQuery} updateMarkers={this.updateMarkers} listClick={this.listClick}/>
           <Map role="application" aria-label="map" {...this.state}/>
         </main>
       
