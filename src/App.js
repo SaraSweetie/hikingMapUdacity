@@ -151,26 +151,27 @@ class App extends React.Component {
   }
 
   //update markers after sidebar filter changed
-  updateMarkers = () => {
+  updateMarkers = (marker) => {
     console.log(this.state.filteredSearch); //get name
     console.log(this.state.markers); // get name
 
-
     //take all markers
     const filteredMarkers = this.state.markers.filter(marker => {
-      //marker.name === this.state.filteredSearch.name
+
       let fm = this.state.filteredSearch.filter(m => m.name === marker.name);
-      console.log(fm);
-      if (fm.length > 0)
+      console.log(fm.length);
+      if (fm.length > 0){
+          marker.setVisible(true);
+          //console.log(fm[0]);
+
         return fm[0];
-    });
-    console.log(filteredMarkers); // getting an array of all undefined
-
-    //either push to markers or //marker.setVisible(true);
-    this.setState({ 
-      markers: filteredMarkers
+      } else {
+        marker.setVisible(false);
+        //console.log("not a match");
+      }
     });
 
+    this.setState({markers:filteredMarkers});
   }
 
   filterParks = (parks, newQuery) => {
