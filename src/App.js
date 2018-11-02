@@ -97,7 +97,7 @@ class App extends React.Component {
         this.setState({markers: allMarkers});
 
         bounds.extend(marker.position);
-      });//end mapping over parks
+      })//end mapping over parks
 
       map.fitBounds(bounds);
   }//end initMap()
