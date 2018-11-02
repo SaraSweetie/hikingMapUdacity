@@ -14,7 +14,7 @@ const Sidebar = (props) => {
 
       <h2>Parks</h2>
         <section id="filterResults">
-          <Park {...props} listClick={props.listClick}/>
+          <Park {...props} listClick={props.listClick} updateMarkers={props.filteredSearch}/>
         </section>
       </section>
   );

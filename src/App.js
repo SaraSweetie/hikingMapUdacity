@@ -37,9 +37,9 @@ class App extends React.Component {
         this.setState({
           parks: results.data,
           filteredSearch: results.data
-        })
+        }, this.renderMap())
           //console.log(results.data) // returns array of parks
-    }, this.renderMap())
+    })
   }
 
   renderMap = () => {
@@ -151,18 +151,22 @@ class App extends React.Component {
   }
 
   //update markers after sidebar filter changed
-  updateMarkers = (key) => {
+  updateMarkers = () => {
     console.log(this.state.filteredSearch); //get name
     console.log(this.state.markers); // get name
 
-    const filteredMarkers = this.state.markers.map(marker => {
-      console.log("update the markers")
 
-      let match = marker.name === this.state.filteredSearch.name
-
-      return filteredMarkers;
+    //take all markers
+    const filteredMarkers = this.state.markers.filter(marker => {
+      //marker.name === this.state.filteredSearch.name
+      let fm = this.state.filteredSearch.filter(m => m.name === marker.name);
+      console.log(fm);
+      if (fm.length > 0)
+        return fm[0];
     });
     console.log(filteredMarkers); // getting an array of all undefined
+
+    //either push to markers or //marker.setVisible(true);
     this.setState({ 
       markers: filteredMarkers
     });
@@ -192,7 +196,7 @@ class App extends React.Component {
         <Header {...this.state.sidebarToggle} menuToggle={this.menuToggle}/>
 
         <main>
-          <Sidebar {...this.state} updateQuery={this.updateQuery} updateMarkers={this.updateMarkers} listClick={this.listClick}/>
+          <Sidebar {...this.state} updateQuery={this.updateQuery} updateMarkers={this.state.filteredSearch} listClick={this.listClick}/>
           <Map role="application" aria-label="map" {...this.state}/>
         </main>
       
